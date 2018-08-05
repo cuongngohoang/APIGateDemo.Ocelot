@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  ApiDemo1:
+    image: apigateway/qa1
+    build:
+      context: .
+      dockerfile: api1/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:9001
+    ports:
+      - "9001:9001"
+  ApiDemo2:
+    image: apigateway/qa1
+    build:
+      context: .
+      dockerfile: api2/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:9002
+    ports:
+      - "9002:9002"      
+networks:
+  default:
+    external:
+      name: nat
+  # ApiDemo2:
+  #   image: microsoft/aspnet
+  #   build:
+  #     context: .
+  #     dockerfile: api2/Dockerfile    
+  # ApiDemo3:
+  #   image: microsoft/aspnet
+  #   build:
+  #     context: .
+  #     dockerfile: api3/Dockerfile    
+  # ApiGateway:
+  #   image: microsoft/dotnet
+  #   build:
+  #     context: .
+  #     dockerfile: ApiGateway/Dockerfile 
+  #   depends_on:
+  #     - ApiDemo1
+      # - ApiDemo2
+      # - ApiDemo3
+
+
+
